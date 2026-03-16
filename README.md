@@ -23,12 +23,12 @@ graph TD
     classDef ai fill:#bbdefb,stroke:#1976d2,stroke-width:2px;
     classDef db fill:#ffcdd2,stroke:#d32f2f,stroke-width:2px;
 
-    User([👨‍🎓 นักเรียน / ผู้ปกครอง]):::user
-    LINE[💬 LINE Official Account]:::line
-    Webhook[[⚡ Webhook Trigger]]:::n8n
-    AIAgent{🤖 AI Agent (n8n)}:::ai
-    VectorDB[(🗄️ Vector Database)]:::db
-    LLM[🧠 LLM API]:::ai
+    User(["👨‍🎓 นักเรียน / ผู้ปกครอง"]):::user
+    LINE["💬 LINE Official Account"]:::line
+    Webhook[["⚡ Webhook Trigger"]]:::n8n
+    AIAgent{"🤖 AI Agent (n8n)"}:::ai
+    VectorDB[("🗄️ Vector Database")]:::db
+    LLM["🧠 LLM API"]:::ai
 
     User -- 1. พิมพ์สอบถามข้อมูล --> LINE
     LINE -- 2. ส่ง Event --> Webhook
