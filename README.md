@@ -40,6 +40,8 @@ graph TD
     AIAgent -- 8. ส่งข้อความกลับ --> LINE
     LINE -- 9. ตอบกลับผู้ใช้งาน --> User
 
+```
+
 
 ## 🔄 Data Engineering Pipeline (กระบวนการเตรียมและจัดการข้อมูล)
 
