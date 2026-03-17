@@ -39,3 +39,60 @@ graph TD
     LLM -- 7. ประมวลผลและสรุปคำตอบ --> AIAgent
     AIAgent -- 8. ส่งข้อความกลับ --> LINE
     LINE -- 9. ตอบกลับผู้ใช้งาน --> User
+
+
+## 🔄 Data Engineering Pipeline (กระบวนการเตรียมและจัดการข้อมูล)
+
+เนื่องจากหัวใจสำคัญของระบบ RAG คือความถูกต้องของข้อมูล (Data Quality) โปรเจกต์นี้จึงให้ความสำคัญกับกระบวนการ ETL (Extract, Transform, Load) เป็นอย่างมาก แผนภาพด้านล่างแสดงถึงขั้นตอนการจัดการข้อมูลตั้งแต่ต้นน้ำไปจนถึงการนำเข้าสู่ Vector Database ครับ:
+
+```mermaid
+flowchart TD
+    classDef source fill:#e3f2fd,stroke:#1e88e5,stroke-width:2px,color:#000
+    classDef extract fill:#fff3e0,stroke:#fb8c00,stroke-width:2px,color:#000
+    classDef process fill:#e8f5e9,stroke:#43a047,stroke-width:2px,color:#000
+    classDef ai fill:#f3e5f5,stroke:#8e24aa,stroke-width:2px,color:#000
+    classDef db fill:#ffebee,stroke:#e53935,stroke-width:2px,color:#000
+
+    subgraph Phase1 ["1. Data Sources (แหล่งข้อมูลตั้งต้น)"]
+        S1["🌐 เว็บไซต์ TCAS"]:::source
+        S2["🏫 เว็บไซต์มหาวิทยาลัย"]:::source
+        S3["📄 ไฟล์ประกาศ (PDF)"]:::source
+    end
+
+    subgraph Phase2 ["2. Data Extraction (การรวบรวมข้อมูล)"]
+        E1["🕷️ Web Scraping & Extract Data"]:::extract
+        E2["📊 Raw Data (ข้อมูลดิบ)"]:::extract
+    end
+
+    subgraph Phase3 ["3. Data Processing & ETL (การทำความสะอาดข้อมูล)"]
+        P1["🗂️ Data Structuring (จัดโครงสร้างตาราง)"]:::process
+        P2["🧹 Data Cleaning (ลบขยะ, จัดรูปแบบ, เติมข้อมูล)"]:::process
+        P3["🔗 Data Integration (เชื่อมตารางด้วย Key)"]:::process
+        P4["✨ Cleaned Master Data (ไฟล์ CSV พร้อมใช้)"]:::process
+    end
+
+    subgraph Phase4 ["4. RAG Pipeline (เตรียมข้อมูลสู่ AI)"]
+        A1["✂️ Text Chunking"]:::ai
+        A2["🔢 Vector Embedding"]:::ai
+        A3[("🗄️ Vector Database")]:::db
+        A4["💬 RAG Chatbot"]:::db
+    end
+
+    S1 --> E1
+    S2 --> E1
+    S3 --> E1
+    
+    E1 --> E2
+    E2 --> P1
+    
+    P1 --> P2
+    P2 --> P3
+    P3 --> P4
+    
+    P4 --> A1
+    A1 --> A2
+    A2 --> A3
+    A3 --> A4
+
+
+
