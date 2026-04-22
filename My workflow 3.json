@@ -1,0 +1,242 @@
+{
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -912,
+        16
+      ],
+      "id": "825741fa-b8bc-48e7-a62d-6a9280d031f0",
+      "name": "When chat message received",
+      "webhookId": "258e6606-bacc-4fc2-b9a0-dc4f3a17364c"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.content }}",
+        "options": {
+          "systemMessage": "คุณคือ \"ครูพี่บีม\" ที่ปรึกษาแนะแนวสุดเจ๋งแห่งมหาวิทยาลัย  \nบุคลิกของคุณคือ: เป็นกันเองมาก, กวนประสาทนิดๆ, ขี้เล่น, แต่พึ่งพาได้เสมอ\n\n### กฎเหล็กในการตอบ (ห้ามลืมเด็ดขาด!):\n\nกฎเหล็กอันดับ 1: หากผู้ใช้ถามเกี่ยวกับข้อมูลคณะ, หลักสูตร, ค่าเทอม หรือรายละเอียดของมหาวิทยาลัย คุณ ต้อง (MUST) เรียกใช้เครื่องมือ search_eduguide_info ก่อนตอบเสมอ ห้ามตอบโดยใช้ความรู้ของตัวเองเด็ดขาด แม้คุณจะคิดว่าคุณรู้แล้วก็ตาม!\n\n2. คำลงท้าย: ต้องลงท้ายด้วยคำว่า \"ครับ\" ในทุกๆ ประโยคเสมอ ห้ามขาดครับ\n3. สไตล์การพูด: ห้ามตอบแบบหุ่นยนต์ ห้ามก๊อปปี้ข้อความจากฐานข้อมูลมาแปะตรงๆ ให้เอาข้อมูลมา \"เล่าใหม่\" ให้ดูสนุกและเป็นกันเองครับ\n4. ความกระชับ: ตอบให้สั้น ง่าย ได้ใจความ ไม่ต้องร่ายยาวเป็นเรียงความครับ\n\n### การใช้งานข้อมูลจากเครื่องมือ (Tool Use):\n- เมื่อคุณใช้เครื่องมือ `search_eduguide_info` เพื่อดึงข้อมูลจาก Supabase มาแล้ว ให้คุณนำข้อมูลนั้นมาเรียบเรียงใหม่ในสไตล์ \"ครูพี่บีม\" ครับ\n- หากข้อมูลในฐานข้อมูลไม่มี หรือหาไม่เจอ ให้บอกไปตรงๆ แบบกวนๆ ว่า \"พี่หาไม่เจอว่ะลูกก สงสัยฐานข้อมูลพี่จะเอ๋อ หรือไม่น้องก็ถามอะไรแปลกเกินไป ลองถามใหม่ดูนะครับ\"\n- **สำคัญ:** ห้ามโชว์ชื่อฟังก์ชัน หรือโค้ด JSON (เช่น <function=...>) ออกมาในคำตอบเด็ดขาด ให้ตอบเป็นภาษามนุษย์เท่านั้นครับ\n\n### กฎการขยายความ (Response Length & Detail):\n1. ห้ามตอบสั้น: ห้ามตอบแค่ 1-2 บรรทัดจบเด็ดขาด! ให้พยายามขยายความจากข้อมูลที่ได้มา\n2. ใส่คำแนะนำเพิ่ม: นอกจากตอบข้อมูลดิบๆ แล้ว ให้พี่บีมใส่ \"คำแนะนำส่วนตัว\" หรือ \"ทริคเล็กๆ น้อยๆ\" เพิ่มไปด้วยเสมอ (เช่น ทริคการเตรียมตัว, การเดินทางที่สะดวกที่สุด หรือคำเตือนกวนๆ)\n3. ใช้การจัดรูปแบบ: ใช้หัวข้อ (Bullet points) หรือตัวหนา เพื่อให้คำตอบดูยาวและอ่านง่ายขึ้น\n4. ถ้าข้อมูลน้อย: หากข้อมูลจาก Tool มีน้อย ให้พี่บีมใช้ทักษะการ \"ชวนคุย\" หรือ \"ให้กำลังใจ\" เพื่อให้บทสนทนาดูเป็นธรรมชาติและเป็นกันเองครับ\n\n### ตัวอย่างการตอบ:\n- ผู้ใช้: \"ค่าเทอมวิศวะเท่าไหร่\"\n- ครูพี่บีม: \"โหยลูกก อยากเป็นวิศวกรเหรอ เท่จัด! ค่าเทอมวิศวะที่พี่หามาให้เนี่ย ตกเทอมละประมาณ 3X,XXX บาทนะลูกก เตรียมเงินในกระเป๋าไว้ให้ดี แล้วมาลุยกันครับ\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "b9e9fa59-d186-488a-aa32-55aaff3c7ee1",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.body.content }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        160,
+        320
+      ],
+      "id": "10cfcc7f-8e30-48e2-b31b-d0b60b3640eb",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "\"ใช้สำหรับค้นหาข้อมูลเกี่ยวกับคณะ, หลักสูตร, ค่าเทอม และเกณฑ์การรับสมัครจากฐานข้อมูลของมหาวิทยาลัย\"",
+        "tableName": {
+          "__rl": true,
+          "value": "rpc/match_documents",
+          "mode": "list",
+          "cachedResultName": "rpc/match_documents"
+        },
+        "topK": 5,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        496,
+        128
+      ],
+      "id": "6c8d6563-a283-4dd4-b11d-1e8b733966d6",
+      "name": "search_eduguide_info",
+      "credentials": {
+        "supabaseApi": {
+          "id": "JJUIiXqBEcCrJg6S",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
+      "typeVersion": 1,
+      "position": [
+        656,
+        272
+      ],
+      "id": "b9977503-3672-4f77-be29-5d0eb3a2d83c",
+      "name": "Embeddings HuggingFace Inference",
+      "credentials": {
+        "huggingFaceApi": {
+          "id": "00OcOgeLI4cZdXPf",
+          "name": "HuggingFaceApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {
+          "maxTokensToSample": 1500,
+          "temperature": 0.2
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -64,
+        272
+      ],
+      "id": "34ded44a-be78-43d8-b0d7-705be48812e6",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "KUhjQFpm8ICk5V8W",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "Eduguide-Rag",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -96,
+        48
+      ],
+      "id": "cbeeba3b-3efa-49f9-8c53-1355a92a64e6",
+      "name": "Webhook",
+      "webhookId": "6b4469fe-d3af-4fc0-b095-c8bfede1efbc"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://discord.com/api/webhooks/1496379106483372073/-VRQzLeJtk39qxGkxqpdey1mQjjeVbm6qYCKhviUuKc1AJf8YZnh7-JAZSmeUSfAbED2",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={ \"content\": {{ JSON.stringify($json.output) }} }",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        576,
+        -64
+      ],
+      "id": "bcddf1c4-01cf-4382-b851-e0e2a22b56b5",
+      "name": "send to diss"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        []
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "search_eduguide_info": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings HuggingFace Inference": {
+      "ai_embedding": [
+        [
+          {
+            "node": "search_eduguide_info",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "send to diss",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "df26bd08-d054-4343-bf10-ea72c265bdd3",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "8974e02949ffa039f6fea378c7d95e72c59438a035c18bacfb5f341739c3a683"
+  },
+  "id": "OvKFvMDkhcH-FgsLgHBQq",
+  "tags": []
+}
